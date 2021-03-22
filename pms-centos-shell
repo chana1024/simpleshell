@@ -1,15 +1,25 @@
+#install git
 if ! [ -x "$(command -v git)" ]
  then
   yum install git -y
 fi
+
+#install maven
 if ! [ -x "$(command -v git)" ]
   then
    yum install maven -y
 fi
 
-sudo wget -O /etc/yum.repos.d/jenkins.repo \
-    https://pkg.jenkins.io/redhat-stable/jenkins.repo
-sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-sudo yum upgrade
-sudo yum install jenkins
-sudo systemctl daemon-reload
+#install jdk
+curl -fsSl https://raw.githubusercontent.com/chana1024/simpleshell/master/jdk-install.sh >>jdk-install.sh
+chmod +x jdk-install.sh 
+./jdk-install.sh ${jdk}
+
+#install jenkins
+wget https://mirrors.tuna.tsinghua.edu.cn/jenkins/redhat-stable/jenkins-2.277.1-1.1.noarch.rpm
+yum install jenkins-2.277.1-1.1.noarch.rpm
+
+#change plugin repo
+#Manager jenkins > manage plugins > advanced > upgrade url
+#重新填写 URL : https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/current/update-center.json
+
