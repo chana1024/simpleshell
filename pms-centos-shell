@@ -5,7 +5,7 @@ if ! [ -x "$(command -v git)" ]
 fi
 
 #install maven
-if ! [ -x "$(command -v git)" ]
+if ! [ -x "$(command -v mvn)" ]
   then
    yum install maven -y
 fi
